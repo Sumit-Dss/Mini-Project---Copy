@@ -1,0 +1,281 @@
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --card-bg: #ffffff;
+    --tooltip-bg: #333;
+    --tooltip-text: #fff;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #404040;
+    --text-primary: #ffffff;
+    --text-secondary: #adb5bd;
+    --border-color: #495057;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --card-bg: #2d2d2d;
+    --tooltip-bg: #000;
+    --tooltip-text: #fff;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    padding: 15px;
+    padding-top: 0px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.type-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.dropdown-menu {
+    height: 350px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.search-input {
+    margin-bottom: 8px;
+}
+
+.dropdown-item {
+    position: relative;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.calorie-tooltip {
+    visibility: hidden;
+    background-color: var(--tooltip-bg);
+    color: var(--tooltip-text);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+.dropdown-item:hover .calorie-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.selected-items-section {
+    width: 100%;
+    margin-top: 3rem;
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#selected-items-list li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+#selected-items-list li:last-child {
+    border-bottom: none;
+}
+
+#total-calories-container {
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: right;
+    border-top: 2px solid var(--text-primary);
+    padding-top: 1rem;
+    color: var(--text-primary);
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.quantity-input {
+    width: 80px;
+    text-align: center;
+}
+
+#calorie-chart-container {
+    position: relative;
+    height: 400px;
+    margin-top: 2rem;
+}
+
+/* Header and Footer Theme Support */
+header {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark mode header background */
+[data-theme="dark"] header {
+    background-color: #2d2d2d !important;
+    border-color: #495057 !important;
+}
+
+/* Light mode header styling */
+header .nav-link {
+    color: #333333 !important;
+    font-family: var(--font-family);
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+header .nav-link:hover {
+    color: #ffffff !important;
+    background-color: #007bff !important;
+}
+
+header .nav-link.active {
+    background-color: #e9ecef !important;
+    color: #6c757d !important;
+}
+
+header .fs-4 {
+    color: #212529 !important;
+    font-family: var(--font-family);
+    transition: color 0.3s ease;
+}
+
+/* Dark mode specific header styling */
+[data-theme="dark"] header .nav-link {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] header .nav-link:hover {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+[data-theme="dark"] header .nav-link.active {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+[data-theme="dark"] header .fs-4 {
+    color: #ffffff !important;
+}
+
+/* Dark mode footer background */
+[data-theme="dark"] footer {
+    background-color: #2d2d2d !important;
+    border-color: #495057 !important;
+}
+
+footer {
+    border-color: var(--border-color) !important;
+    transition: border-color 0.3s ease;
+}
+
+/* Light mode footer styling */
+footer .text-body-secondary {
+    color: #6c757d !important;
+    transition: color 0.3s ease;
+}
+
+footer .nav-link {
+    color: #6c757d !important;
+    transition: color 0.3s ease;
+}
+
+footer .nav-link:hover {
+    color: #007bff !important;
+}
+
+/* Dark mode specific footer styling */
+[data-theme="dark"] footer .text-body-secondary {
+    color: #adb5bd !important;
+}
+
+[data-theme="dark"] footer .nav-link {
+    color: #adb5bd !important;
+}
+
+[data-theme="dark"] footer .nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+/* Form elements theme support */
+.form-control {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background-color: var(--bg-secondary);
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Dark mode form elements */
+[data-theme="dark"] .form-control {
+    background-color: #404040 !important;
+    border-color: #495057 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .form-control:focus {
+    background-color: #404040 !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+.bg-body-tertiary {
+    background-color: var(--bg-tertiary) !important;
+    transition: background-color 0.3s ease;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

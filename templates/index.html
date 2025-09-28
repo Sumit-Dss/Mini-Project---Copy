@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ===========================================
+         HEAD SECTION - Meta tags and external resources
+         =========================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Tracker</title>
+    
+    <!-- External CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- ===========================================
+         HEADER SECTION - Navigation and controls
+         =========================================== -->
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-white rounded shadow-sm">
+        <!-- Brand/Logo Section -->
+        <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img class="bi me-2" width="40" height="32" aria-hidden="true" src="/static/logo.png">
+            <span class="fs-4">Calorie Tracker</span>
+        </a>
+        
+        <!-- Navigation Menu -->
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link active rounded-pill" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link rounded-pill">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link rounded-pill">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link rounded-pill">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link rounded-pill">About</a></li>
+            
+            <!-- Date Picker and Theme Toggle Controls -->
+            <li class="nav-item">
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Date Picker - for selecting different days -->
+                    <input type="date" id="date-picker" class="form-control form-control-sm" style="width: auto;">
+                    <!-- Theme Toggle Button - switches between light/dark mode -->
+                    <button id="theme-toggle" class="btn btn-outline-secondary rounded-pill" type="button">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <!-- ===========================================
+         FOOD SEARCH SECTION - Main food selection area
+         =========================================== -->
+    <main class="d-flex justify-content-center w-100 p-3">
+        <div class="dropdown-menu d-block position-static pt-0 mx-0 rounded-3 shadow overflow-hidden w-75" data-bs-theme="light">
+            <!-- Food Search Input -->
+            <form class="p-2 mb-2 bg-body-tertiary border-bottom">
+                <div class="position-relative">
+                    <input type="search" id="food-search-input" class="form-control search-input rounded-pill" autocomplete="off" placeholder="Search for food...">
+                    
+                    <!-- Search Results Dropdown -->
+                    <div id="search-results" class="search-results" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #dee2e6; border-top: none; border-radius: 0 0 0.375rem 0.375rem; box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); max-height: 300px; overflow-y: auto; z-index: 1000; display: none;">
+                        <div class="loading-spinner" id="loading-spinner" style="display: none; text-align: center; padding: 1rem; color: #6c757d;">
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            Searching...
+                        </div>
+                        <div class="no-results" id="no-results" style="display: none; padding: 1rem; text-align: center; color: #6c757d; font-style: italic;">
+                            No food items found
+                        </div>
+                        <div id="results-list"></div>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- Dynamic Food Items List - Populated by Search Results -->
+            <ul class="list-unstyled mb-0 overflow-auto" style="max-height: 250px;" id="food-items-list">
+                <!-- Food items will be populated dynamically via JavaScript -->
+                <li class="dropdown-item text-center text-muted py-3">
+                    <em>Start typing to search for food items...</em>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- ===========================================
+         CALORIE TRACKING SECTION - Daily tracking and analytics
+         =========================================== -->
+    <div class="container selected-items-section w-75">
+        <!-- Section Header with Total and Save Button -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Daily Calorie Tracking</h2>
+            <div class="d-flex align-items-center gap-3">
+                <!-- Daily Total Display -->
+                <span class="badge bg-primary fs-6">Today's Total: <span id="daily-total-calories">0</span> calories</span>
+                <!-- Save Button - saves current day's data to localStorage -->
+                <button id="save-daily-calories" class="btn btn-success btn-sm">Save Day</button>
+            </div>
+        </div>
+        
+        <!-- Two Column Layout: Selected Items + Chart -->
+        <div class="row">
+            <!-- Left Column: Selected Food Items -->
+            <div class="col-md-6">
+                <h4>Today's Items</h4>
+                <!-- Dynamic list of selected food items with quantities -->
+                <ul id="selected-items-list" class="list-unstyled">
+                    <!-- Items are dynamically added here via JavaScript -->
+                </ul>
+            </div>
+            
+            <!-- Right Column: Calorie History Chart -->
+            <div class="col-md-6">
+                <h4>Calorie History</h4>
+                <!-- Chart.js canvas for displaying calorie trends over time -->
+                <div id="calorie-chart-container">
+                    <canvas id="calorie-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===========================================
+         FOOTER SECTION - Site information and links
+         =========================================== -->
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <!-- Copyright Information -->
+        <p class="col-md-4 mb-0 text-body-secondary">© 2025 Calorie Tracker, Inc</p>
+        
+        <!-- Logo/Brand -->
+        <a href="#" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap">
+            <img class="bi me-2" width="40" height="32" aria-hidden="true" src="/static/logo.png">
+        </a>
+        
+        <!-- Footer Navigation Links -->
+        <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+        </ul>
+    </footer>
+    <!-- ===========================================
+         JAVASCRIPT SECTION - External scripts and functionality
+         =========================================== -->
+    
+    <!-- Main Application JavaScript -->
+    <script src="/static/index.js"></script>
+    
+    <!-- External JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
