@@ -59,11 +59,4 @@ def signin():
     return render_template('sign-in.html')
 
 if __name__ == "__main__":
-    # Initialize sample data on startup
-    try:
-        initialize_sample_data()
-        print("Sample data initialized successfully!")
-    except Exception as e:
-        print(f"Warning: Could not initialize sample data: {e}")
-    
     app.run(debug=True)
